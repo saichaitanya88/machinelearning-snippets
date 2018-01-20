@@ -4,6 +4,8 @@ object DistanceMeasures extends App{
   println(s"EuclideanDistance((${10},${16}),(${37},${6})): " + new EuclideanDistance().distance(new Point(10,16), new Point(37,6)))
   println(s"JaccardDistance((1,2,3,4,5),(3,4,5,6,7,8,9)): " + new JaccardDistance().distance(Set(1,2,3,4,5), Set(3,4,5,6,7,8,9)))
   println(s"EditDistance('sittin', 'sitting'): " + new EditDistance().distance("sittin", "sitting"))
+  println(s"CosineDistance({'foo': 2, 'bar': 3, 'baz': 5 }, {'foo': 1, 'bar': 0, 'baz': 20 }): "
+    + new CosineDistance().distance(Map("foo" -> 2, "bar" -> 3, "baz" -> 5), Map("foo" -> 1, "bar" -> 0, "baz" -> 20)))
 }
 
 // src: https://en.wikipedia.org/wiki/Hamming_distance
@@ -44,7 +46,19 @@ class EditDistance{
 }
 
 class CosineDistance{
+  def distance(a: Map[String, Int], b: Map[String, Int]): Double = {
+    dotprod(a,b) / norm(a) / norm(b)
+  }
 
+  def dotprod(a: Map[String, Int], b: Map[String, Int]): Double = {
+      a
+      .keys
+      .filter(k => b.contains(k))
+      .map(k => a.getOrElse(k, 0) * b.getOrElse(k, 0))
+      .foldLeft(0)(_+_)
+  }
+
+  def norm(a : Map[String,Int]): Double = Math.sqrt(dotprod(a,a))
 }
 
 // src: https://en.wikipedia.org/wiki/Jaccard_index
