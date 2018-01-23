@@ -31,7 +31,7 @@ class BloomFilter (size: Int, hashCount: Int) {
       val result = MurmurHash3.stringHash(text, i) % size
       // MurmurHash3.stringHash sometimes returns -ve value.
       // Ignore this value for simplicity, at the cost of potentially lower accuracy of the filter
-      if (result > 0)
+      if (result >= 0)
         bitArray(result) = true
     }
   }
@@ -39,7 +39,7 @@ class BloomFilter (size: Int, hashCount: Int) {
   def lookup(text: String): Boolean = {
     for (i<-0 to hashCount){
       val result = MurmurHash3.stringHash(text, i) % size
-      if (result > 0 && bitArray(result) == false)
+      if (result >= 0 && bitArray(result) == false)
         return false
     }
 
