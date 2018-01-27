@@ -3,7 +3,7 @@ Estimated Moment of c from 2 is 75.0
 Estimated Moment of d from 7 is 45.0
 Estimated Moment of a from 12 is 45.0
 Average Second Moment is: 55.0  /  Actual Second Moment: 59.0
---- Infinite Stream window size 5 ----
+--- Infinite Stream window size 15 ----
 Average Second Moment is: 5.0  /  Actual Second Moment: 7.0
 Average Second Moment is: 5.0  /  Actual Second Moment: 7.0
 Average Second Moment is: 5.0  /  Actual Second Moment: 7.0
