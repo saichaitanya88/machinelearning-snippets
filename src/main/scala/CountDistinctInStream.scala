@@ -1,8 +1,3 @@
-import scala.io.Source
-import scala.util.hashing.MurmurHash3
-import sys.process._
-
-
 // src: https://en.wikipedia.org/wiki/Flajolet%E2%80%93Martin_algorithm
 object CountDistinctInStream extends App {
   val words = "1 2 3 4 5 6 7 8 9 0 1 2 5 6 7 a b c d f e g h 1".split(" ")
