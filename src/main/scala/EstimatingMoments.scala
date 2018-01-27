@@ -26,10 +26,10 @@ object EstimatingMoments extends App {
     println(s"Actual Second Moment: ${ams.secondMoment()}")
   }
   def infiniteStream() : Unit = {
-    println("--- Infinite Stream window size 5 ----")
+    var streamIndex = 15;
+    println(s"--- Infinite Stream window size ${streamIndex} ----")
     val a = "a"; val b = "b"; val c = "c"; val d = "d";
     val stream = List(a,b,c,b,d,a,c,d,a,b,d,c,a,a,b,a,b,c,b,d,a,c,d,a,b,d,c,a,a,b,a,b,c,b,d,a,c,d,a,b,d,c,a,a,b,a,b,c,b,d,a,c,d,a,b,d,c,a,a,b);
-    var streamIndex = 15;
     val is = new InfiniteStream(stream.take(5));
     stream.drop(5).foreach(item => {
       is.insert(item)
