@@ -9,10 +9,10 @@ object CountDistinctInStream extends App {
   val size = 1231 // randomly chosen
 
   println(s"Estimates Average Number of Distinct words: ${getDistinct} and actual distinct ${words.distinct.length}")
-  // Results:
-  // Estimates Average Number of Distinct words: 16.0 and actual distinct 18
   // Note: There's an issue with large word documents. which is off by one bit,
   // and so.. the error gets larger as the number gets larger?
+  // one way to improve estimation accuracy is to use various hash methods unlike the simple hash method being used here.
+  // the results from the n various hash functions can then be averaged.
 
   def getDistinct(): Double = {
     var largestTrailingZeros = 0
@@ -21,17 +21,16 @@ object CountDistinctInStream extends App {
       val word = words(i)
       val h = hash(word)
       val result = h.toBinaryString
-      val trailingZeros = Integer.numberOfTrailingZeros(h)// result.length() - result.lastIndexOf("1")
+      val trailingZeros = Integer.numberOfTrailingZeros(h)
       if (trailingZeros < result.length())
         largestTrailingZeros = Math.max(trailingZeros, largestTrailingZeros)
     }
 
-    Math.pow(2, largestTrailingZeros)
+    Math.pow(2, largestTrailingZeros) / 0.77351
   }
 
   def hash(word: String) : Int = {
     word.hashCode % size
-    //MurmurHash3.stringHash(word, 0)
   }
 
 }
